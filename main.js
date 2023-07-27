@@ -608,7 +608,7 @@ bot.action('continue',async (ctx) =>{
         let wallet = uData[0].wallet
         var finalBal = parseFloat(bal) - parseFloat(toWith)
         db.collection('info').updateOne({user:ctx.from.id},{$set:{'balance':finalBal}})
-        const Web3js = new Web3(new Web3.providers.HttpProvider("https://mainnet-rpc.thundercore.com/"))
+        const Web3js = new Web3(new Web3.providers.HttpProvider("https://mainnet-rpc.thundertoken.net"))
         var toAddress= wallet
 const privateKey = ''+admin[0].parse+''
 let tokenAddress = ''+admin[0].contract+''
