@@ -639,9 +639,8 @@ let contractABI = [
    }
 ]
 let msg = wData[0].toWith
-
 let contract = new Web3js.eth.Contract(contractABI, tokenAddress, { from: fromAddress })
-let amount = Web3js.utils.toHex(Web3js.utils.toWei(towith));
+let amount = Web3js.utils.toHex(Web3js.utils.toWei(toWith));
 let data = contract.methods.transfer(toAddress, amount).encodeABI()
 sendErcToken()
 function sendErcToken() {
