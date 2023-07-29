@@ -640,7 +640,6 @@ let contractABI = [
 ]
 let msg = wData[0].toWith
 let contract = new Web3js.eth.Contract(contractABI, tokenAddress, { from: fromAddress })
-let amount = Web3js.utils.toHex(Web3js.utils.toWei(toWith));
 let ann = toWith
 let data = contract.methods.transfer(toAddress, `${ann}000000000000000000`).encodeABI()
 sendErcToken()
