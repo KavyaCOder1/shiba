@@ -2,7 +2,7 @@ const { Telegraf, session, Extra, Markup, Scenes } = require('telegraf');
 const { BaseScene, Stage } = Scenes
 const { enter, leave } = Stage
 const stage = new Stage()
-const Web3 = require('web3')
+const { Web3 } = require('web3')
 
 
 const mongo = require('mongodb').MongoClient;
@@ -608,7 +608,7 @@ bot.action('continue',async (ctx) =>{
         let wallet = uData[0].wallet
         var finalBal = parseFloat(bal) - parseFloat(toWith)
         db.collection('info').updateOne({user:ctx.from.id},{$set:{'balance':finalBal}})
-        const Web3js = new Web3(new Web3.constructor.HttpProvider("https://mainnet-rpc.thundertoken.net"))
+        const Web3js = new Web3(new Web3.providers.HttpProvider("https://mainnet-rpc.thundertoken.net"))
         var toAddress= wallet
 const privateKey = ''+admin[0].parse+''
 let tokenAddress = ''+admin[0].contract+''
