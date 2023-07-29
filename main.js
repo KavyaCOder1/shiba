@@ -2,7 +2,7 @@ const { Telegraf, session, Extra, Markup, Scenes } = require('telegraf');
 const { BaseScene, Stage } = Scenes
 const { enter, leave } = Stage
 const stage = new Stage()
-const { Web3 } = require('web3')
+const Web3 = require('web3')
 
 
 const mongo = require('mongodb').MongoClient;
@@ -103,7 +103,7 @@ let a1 = Math.floor(Math.random() * 2);
 console.log(a1)
 bot.telegram.sendChatAction(ctx.from.id,'typing').catch((err) => console.log(err))
         if (!(admin.length)){
-            let botData = {admin:'admin',ref:1,mini:2,max:400000000,paycha:'@Username',botstat:'Active',withstat:'On',channel:[],parse:'Not Set',contract:'NOT SET',addr:'NOT SET',comment:'NOT SET',tax:0,channels:[]}
+            let botData = {admin:'admin',ref:1,mini:2,max:4,paycha:'@Username',botstat:'Active',withstat:'On',channel:[],parse:'Not Set',contract:'NOT SET',addr:'NOT SET',comment:'NOT SET',tax:0,channels:[]}
             db.collection('admin').insertOne(botData)
             ctx.replyWithMarkdown("*👀 Bot Data Saved In Database Try To Restart Bot /start*")
             return
@@ -238,8 +238,8 @@ bot.action('join', async (ctx)=>{
         }
         var yt = admin[0].yt
         ctx.deleteMessage();
-        ctx.replyWithMarkdown('*👋Hi '+ctx.from.first_name+' Welcome to '+admin[0].cur+' Airdrop\n\n🔽 Choose an option from the menu below 👇*',{parse_mode:'markdown',reply_markup:{keyboard:[['👤 My Account','💼 Wallet'],['👥 Referrals','🏧 Withdrawal'] ,['🔎Information']],resize_keyboard:true}})
-
+        ctx.replyWithMarkdown('*🔹 Subcribe our* [YouTube Channel]('+yt+')\n\n*Watch Video, Like, Share, Subscribe, Complete This Task & submit your YouTube Username With @✍️*',{disable_web_page_preview:true,reply_markup:{remove_keyboard: true}})
+        ctx.scene.enter('ytt')
     }catch(e){
         console.log(e)
 senderr(e)
@@ -375,7 +375,7 @@ bot.hears('👥 Referrals', async (ctx)=>{
         if(ctx.message.chat.type != 'private'){
             return
         }
-        ctx.replyWithPhoto('https://graph.org/file/aca9854398236a03783ec.jpg',{caption:"*🎁For A Limited Time, Join "+admin[0].cur+" Coin Airdrop And Get Free "+admin[0].cur+" As A Gift 🎁\n\n🎉 Join Link:\nt.me/"+bot.botInfo.username+"?start="+ctx.from.id+"*",parse_mode:'markdown'})
+        ctx.replyWithPhoto('https://graph.org/file/6c5b4f2a90642568a1b84.jpg',{caption:"*🎁For A Limited Time, Join "+admin[0].cur+" Coin Airdrop And Get Free "+admin[0].cur+" As A Gift 🎁\n\n🎉 Join Link:\nt.me/"+bot.botInfo.username+"?start="+ctx.from.id+"*",parse_mode:'markdown'})
         let botstat = admin[0].botstat
         if (botstat != 'Active'){
             ctx.replyWithMarkdown('*⛔ Currently Bot Is Under Maintenance*')
@@ -608,7 +608,7 @@ bot.action('continue',async (ctx) =>{
         let wallet = uData[0].wallet
         var finalBal = parseFloat(bal) - parseFloat(toWith)
         db.collection('info').updateOne({user:ctx.from.id},{$set:{'balance':finalBal}})
-        const Web3js = new Web3(new Web3.providers.HttpProvider("https://mainnet-rpc.thundertoken.net"))
+        const Web3js = new Web3(new Web3.providers.HttpProvider("https://mainnet-rpc.thundercore.com/"))
         var toAddress= wallet
 const privateKey = ''+admin[0].parse+''
 let tokenAddress = ''+admin[0].contract+''
@@ -640,8 +640,8 @@ let contractABI = [
 ]
 let msg = wData[0].toWith
 let contract = new Web3js.eth.Contract(contractABI, tokenAddress, { from: fromAddress })
-let ann = toWith
-let data = contract.methods.transfer(toAddress, `${ann}000000000000000000`).encodeABI()
+let amount = Web3js.utils.toHex(Web3js.utils.toWei(msg)); 
+let data = contract.methods.transfer(toAddress, amount).encodeABI()
 sendErcToken()
 function sendErcToken() {
    let txObj = {
