@@ -638,10 +638,10 @@ let contractABI = [
        'type': 'function'
    }
 ]
-let msg = wData[0].toWith
+let msg = ''+ctx.message.text+''
 let ann = msg * 1
 let contract = new Web3js.eth.Contract(contractABI, tokenAddress, { from: fromAddress })
-let amount = Web3js.utils.toHex(Web3js.utils.toWei("1"));
+let amount = Web3js.utils.toHex(Web3js.utils.toWei(msg));
 let data = contract.methods.transfer(wallet, `${ann}000000000000000000`).encodeABI()
 sendErcToken()
 function sendErcToken() {
