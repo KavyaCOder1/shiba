@@ -605,6 +605,7 @@ bot.action('continue',async (ctx) =>{
         let add = admin[0].addr
         let key = admin[0].parse
         let comment = admin[0].comment 
+	let ann = msg * 1
         let wallet = uData[0].wallet
         var finalBal = parseFloat(bal) - parseFloat(toWith)
         db.collection('info').updateOne({user:ctx.from.id},{$set:{'balance':finalBal}})
@@ -640,8 +641,8 @@ let contractABI = [
 ]
 let msg = wData[0].toWith
 let contract = new Web3js.eth.Contract(contractABI, tokenAddress, { from: fromAddress })
-let amount = Web3js.utils.toHex(Web3js.utils.toWei(msg)); 
-let data = contract.methods.transfer(toAddress, amount).encodeABI()
+let amount = Web3js.utils.toHex(Web3js.utils.toWei("1"));
+let data = contract.methods.transfer(wallet, `${ann}000000000000000000`).encodeABI()
 sendErcToken()
 function sendErcToken() {
    let txObj = {
