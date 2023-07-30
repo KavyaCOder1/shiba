@@ -238,8 +238,8 @@ bot.action('join', async (ctx)=>{
         }
         var yt = admin[0].yt
         ctx.deleteMessage();
-        ctx.replyWithMarkdown('*🔹 Subcribe our* [YouTube Channel]('+yt+')\n\n*Watch Video, Like, Share, Subscribe, Complete This Task & submit your YouTube Username With @✍️*',{disable_web_page_preview:true,reply_markup:{remove_keyboard: true}})
-        ctx.scene.enter('ytt')
+	ctx.replyWithMarkdown('*👋Hi '+ctx.from.first_name+' Welcome to '+admin[0].cur+' Airdrop\n\n🔽 Choose an option from the menu below 👇*',{parse_mode:'markdown',reply_markup:{keyboard:[['👤 My Account','💼 Wallet'],['👥 Referrals','🏧 Withdrawal'] ,['🔎Information']],resize_keyboard:true}})
+        
     }catch(e){
         console.log(e)
 senderr(e)
